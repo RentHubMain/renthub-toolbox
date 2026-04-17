@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Design System Generator - Aggregates search results and applies reasoning
-to generate comprehensive design system recommendations.
+设计系统生成器 — 聚合检索结果并应用推理规则，
+生成完整的设计系统建议。
 
-Usage:
+用法:
     from design_system import generate_design_system
     result = generate_design_system("SaaS dashboard", "My Project")
     
-    # With persistence (Master + Overrides pattern)
+    # 持久化（主文件 + 覆盖文件模式）
     result = generate_design_system("SaaS dashboard", "My Project", persist=True)
     result = generate_design_system("SaaS dashboard", "My Project", persist=True, page="dashboard")
 """
@@ -21,7 +21,7 @@ from pathlib import Path
 from core import search, DATA_DIR
 
 
-# ============ CONFIGURATION ============
+# ============ 配置 ============
 REASONING_FILE = "ui-reasoning.csv"
 
 SEARCH_CONFIG = {
@@ -33,7 +33,7 @@ SEARCH_CONFIG = {
 }
 
 
-# ============ DESIGN SYSTEM GENERATOR ============
+# ============ 设计系统生成器 ============
 class DesignSystemGenerator:
     """Generates design system recommendations from aggregated searches."""
 
@@ -236,7 +236,7 @@ class DesignSystemGenerator:
         }
 
 
-# ============ OUTPUT FORMATTERS ============
+# ============ 输出格式化 ============
 BOX_WIDTH = 90  # Wider box for more content
 
 def format_ascii_box(design_system: dict) -> str:
@@ -458,7 +458,7 @@ def format_markdown(design_system: dict) -> str:
     return "\n".join(lines)
 
 
-# ============ MAIN ENTRY POINT ============
+# ============ 主入口 ============
 def generate_design_system(query: str, project_name: str = None, output_format: str = "ascii", 
                            persist: bool = False, page: str = None, output_dir: str = None) -> str:
     """
@@ -487,7 +487,7 @@ def generate_design_system(query: str, project_name: str = None, output_format: 
     return format_ascii_box(design_system)
 
 
-# ============ PERSISTENCE FUNCTIONS ============
+# ============ 持久化函数 ============
 def persist_design_system(design_system: dict, page: str = None, output_dir: str = None, page_query: str = None) -> dict:
     """
     Persist design system to design-system/<project>/ folder using Master + Overrides pattern.
@@ -1052,14 +1052,14 @@ def _detect_page_type(context: str, style_results: list) -> str:
     return "General"
 
 
-# ============ CLI SUPPORT ============
+# ============ 命令行 ============
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description="Generate Design System")
-    parser.add_argument("query", help="Search query (e.g., 'SaaS dashboard')")
-    parser.add_argument("--project-name", "-p", type=str, default=None, help="Project name")
-    parser.add_argument("--format", "-f", choices=["ascii", "markdown"], default="ascii", help="Output format")
+    parser = argparse.ArgumentParser(description="生成设计系统")
+    parser.add_argument("query", help="检索查询（例如 'SaaS dashboard'）")
+    parser.add_argument("--project-name", "-p", type=str, default=None, help="项目名称")
+    parser.add_argument("--format", "-f", choices=["ascii", "markdown"], default="ascii", help="输出格式")
 
     args = parser.parse_args()
 

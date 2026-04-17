@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-UI/UX Pro Max Core - BM25 search engine for UI/UX style guides
+UI/UX Pro Max 核心 — 面向 UI/UX 风格指南的 BM25 搜索引擎
 """
 
 import csv
@@ -10,7 +10,7 @@ from pathlib import Path
 from math import log
 from collections import defaultdict
 
-# ============ CONFIGURATION ============
+# ============ 配置 ============
 DATA_DIR = Path(__file__).parent.parent / "data"
 MAX_RESULTS = 3
 
@@ -92,7 +92,7 @@ _STACK_COLS = {
 AVAILABLE_STACKS = list(STACK_CONFIG.keys())
 
 
-# ============ BM25 IMPLEMENTATION ============
+# ============ BM25 实现 ============
 class BM25:
     """BM25 ranking algorithm for text search"""
 
@@ -155,7 +155,7 @@ class BM25:
         return sorted(scores, key=lambda x: x[1], reverse=True)
 
 
-# ============ SEARCH FUNCTIONS ============
+# ============ 检索函数 ============
 def _load_csv(filepath):
     """Load CSV and return list of dicts"""
     with open(filepath, 'r', encoding='utf-8') as f:

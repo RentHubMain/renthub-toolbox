@@ -1,8 +1,8 @@
 ---
-name: legal-version-release
+name: renthub-legal-version-release
 description: 在 `renthub-docs/legal/` 协议定稿后发布新版本：归档旧版、升级现行版、更新导航与配置并验证构建。
 ---
-# 法律文档版本发布（legal-version-release）
+# 法律文档版本发布（renthub-legal-version-release）
 
 ## 适用场景
 

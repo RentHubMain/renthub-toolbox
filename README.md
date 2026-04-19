@@ -63,16 +63,16 @@ Skills 是写给 **AI 代理** 的操作说明：何时启用、按什么步骤�
 2. **在对话里显式引用**：在支持 `@` 引用路径的客户端中，可 **`@.rulesync/skills/.../SKILL.md`**（或生成后的等价路径），让当前会话按该 skill 执行。  
 3. **人工阅读**：直接打开对应 `SKILL.md` 了解流程与命令。
 
-以下为 **RentHub 当前内置的 5 个 skill**（文件夹名 = 目录名；YAML 里的 `name` 为 skill 逻辑名）。
+以下为 **RentHub 当前内置的 5 个 skill**（YAML `name` 与技能包目录名一致：`renthub-*` / `rh-sup-*`）。
 
 ---
 
-### `renthub-brainstorming`（`name: brainstorming`）
+### `rh-sup-brainstorming`（`name: rh-sup-brainstorming`）
 
 | 项目 | 说明 |
 |------|------|
 | **何时用** | 在写代码/脚手架/改行为之前，做任何**创造性或规格级**工作前：**新功能、新组件、改交互、改架构**等。 |
-| **怎么用** | 按 `SKILL.md` 流程：摸清上下文 → 必要时提供「可视化伴侣」→ 逐条澄清 → 给出 2–3 方案 → 分节设计并获批准 → 写设计文档到 `docs/superpowers/specs/` → 规格自检与用户审阅 → 再进入实现（文档中约定下一步为 **writing-plans**，**禁止**在设计批准前写实现代码）。 |
+| **怎么用** | 按 **`.cursor/skills/rh-sup-brainstorming/SKILL.md`** 流程：摸清上下文 → 必要时提供「可视化伴侣」→ 逐条澄清 → 给出 2–3 方案 → 分节设计并获批准 → 写设计文档到 `docs/superpowers/specs/` → 规格自检与用户审阅 → 再进入实现（文档中约定下一步为 **`rh-sup-writing-plans`**，**禁止**在设计批准前写实现代码）。 |
 | **配套文件** | `visual-companion.md`（浏览器可视化脑暴）、`spec-document-reviewer-prompt.md`（子代理审规格模板）、`scripts/`（本地预览服务器等）。 |
 
 ---
@@ -86,7 +86,7 @@ Skills 是写给 **AI 代理** 的操作说明：何时启用、按什么步骤�
 
 ---
 
-### `renthub-legal-version-release`（`name: legal-version-release`）
+### `renthub-legal-version-release`（`name: renthub-legal-version-release`）
 
 | 项目 | 说明 |
 |------|------|
@@ -95,16 +95,16 @@ Skills 是写给 **AI 代理** 的操作说明：何时启用、按什么步骤�
 
 ---
 
-### `renthub-test-driven-development`（`name: test-driven-development`）
+### `rh-sup-test-driven-development`（`name: rh-sup-test-driven-development`）
 
 | 项目 | 说明 |
 |------|------|
 | **何时用** | **实现任何功能或修 bug 之前**；新功能、缺陷、重构、行为变更都应默认遵循（文档列出的少数例外需与协作方确认）。 |
-| **怎么用** | 严格 **红 → 绿 → 重构**：先写**失败测试**并看到失败 → 最少实现通过 → 再整理；禁止先写生产代码再补测试。Mock / 测试坏味道见同目录 **`testing-anti-patterns.md`**。 |
+| **怎么用** | 严格 **红 → 绿 → 重构**：先写**失败测试**并看到失败 → 最少实现通过 → 再整理；禁止先写生产代码再补测试。Mock / 测试坏味道见 **`.cursor/skills/rh-sup-test-driven-development/testing-anti-patterns.md`**。 |
 
 ---
 
-### `renthub-ui-ux-pro-max`（`name: ui-ux-pro-max`）
+### `renthub-ui-ux-pro-max`（`name: renthub-ui-ux-pro-max`）
 
 | 项目 | 说明 |
 |------|------|

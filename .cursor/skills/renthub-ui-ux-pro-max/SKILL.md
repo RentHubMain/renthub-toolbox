@@ -1,8 +1,8 @@
 ---
-name: ui-ux-pro-max
+name: renthub-ui-ux-pro-max
 description: 基于内置数据集检索，快速产出可落地的 UI/UX 设计系统与实现要点（Web/移动端均可）。
 ---
-# UI/UX 专业增强（ui-ux-pro-max）
+# UI/UX 专业增强（renthub-ui-ux-pro-max）
 
 ## 适用场景
 

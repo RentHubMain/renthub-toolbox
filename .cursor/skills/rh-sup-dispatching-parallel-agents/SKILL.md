@@ -1,5 +1,5 @@
 ---
-name: dispatching-parallel-agents
+name: rh-sup-dispatching-parallel-agents
 description: 在存在 2 个以上可独立推进、无共享状态或顺序依赖的任务时使用。
 ---
 # 并行派发代理（Dispatching Parallel Agents）

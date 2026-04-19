@@ -1,5 +1,5 @@
 ---
-name: brainstorming
+name: rh-sup-brainstorming
 description: 在任何创造性工作之前必须使用——新建功能、做组件、加能力或改行为；在实现前通过对话澄清意图、需求与设计。
 ---
 # 把想法脑暴成设计

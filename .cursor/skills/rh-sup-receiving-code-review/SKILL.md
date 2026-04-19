@@ -1,5 +1,5 @@
 ---
-name: receiving-code-review
+name: rh-sup-receiving-code-review
 description: 在收到代码评审意见、准备落实建议之前使用；尤其当反馈含糊或技术上可疑时——要求技术严谨与核实，不要表演式认同或盲目照做。
 ---
 # 接收代码评审（Code Review Reception）

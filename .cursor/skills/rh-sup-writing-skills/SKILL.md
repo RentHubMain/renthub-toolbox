@@ -1,5 +1,5 @@
 ---
-name: writing-skills
+name: rh-sup-writing-skills
 description: 在新建技能、编辑既有技能，或部署前验证技能是否真正生效时使用。
 ---
 # 编写技能（Writing Skills）
@@ -100,7 +100,7 @@ skills/
 
 - 必填：`name`、`description`（完整字段见 [agentskills.io/specification](https://agentskills.io/specification)）  
 - 头信息总长 ≤ 1024 字符  
-- `name`：仅字母、数字、连字符（无括号等特殊字符）  
+- `name`：仅字母、数字、连字符（无括号等特殊字符）；**本仓库**与技能包目录名一致，形如 `rh-sup-*`  
 - `description`：第三人称，**只写何时用**（不写做什么）  
   - 以「在…时使用」或「Use when…」式触发条件开头（本仓库中文技能多用「在…时」）  
   - 写具体症状、情境、上下文  
@@ -109,7 +109,7 @@ skills/
 
 ```markdown
 ---
-name: Skill-Name-With-Hyphens
+name: rh-sup-your-topic
 description: 在 [具体触发条件与症状] 时使用
 ---
 

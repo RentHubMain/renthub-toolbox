@@ -1,5 +1,5 @@
 ---
-name: verification-before-completion
+name: rh-sup-verification-before-completion
 description: 在声称工作已完成、已修复或通过之前使用；在提交或创建 PR 前必须运行验证命令并确认输出；先有证据再下结论。
 ---
 # 完成前验证（Verification Before Completion）

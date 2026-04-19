@@ -1,5 +1,5 @@
 ---
-name: requesting-code-review
+name: rh-sup-requesting-code-review
 description: 在完成任务、实现较大功能或合并前，用于验证工作是否符合要求时使用。
 ---
 # 请求代码评审（Requesting Code Review）

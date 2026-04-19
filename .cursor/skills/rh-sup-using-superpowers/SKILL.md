@@ -1,5 +1,5 @@
 ---
-name: using-superpowers
+name: rh-sup-using-superpowers
 description: 在每次对话开始时使用；约定如何发现与使用技能，并要求在**任何**回应（含澄清提问）之前先通过 Skill 工具加载相关技能。
 ---
 <SUBAGENT-STOP>

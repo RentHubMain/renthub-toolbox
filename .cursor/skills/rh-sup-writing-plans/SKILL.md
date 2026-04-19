@@ -1,5 +1,5 @@
 ---
-name: writing-plans
+name: rh-sup-writing-plans
 description: 在有多步任务的书面规格或需求、且尚未改代码时使用。
 ---
 # 编写实现计划（Writing Plans）

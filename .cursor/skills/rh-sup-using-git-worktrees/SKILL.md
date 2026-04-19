@@ -1,5 +1,5 @@
 ---
-name: using-git-worktrees
+name: rh-sup-using-git-worktrees
 description: 在开始需要与工作区隔离的功能开发，或在执行实现计划之前使用；通过目录优先级与安全校验创建隔离的 git worktree。
 ---
 # 使用 Git Worktrees（Using Git Worktrees）

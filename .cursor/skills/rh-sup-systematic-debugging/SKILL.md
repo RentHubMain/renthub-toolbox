@@ -1,5 +1,5 @@
 ---
-name: systematic-debugging
+name: rh-sup-systematic-debugging
 description: 在遇到任何缺陷、测试失败或异常行为时，在提出修复方案之前必须使用。
 ---
 # 系统化调试（Systematic Debugging）

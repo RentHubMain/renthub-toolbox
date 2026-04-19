@@ -1,5 +1,5 @@
 ---
-name: subagent-driven-development
+name: rh-sup-subagent-driven-development
 description: 在本会话中执行「任务彼此独立」的实现计划时使用。
 ---
 # 子代理驱动开发（Subagent-Driven Development）

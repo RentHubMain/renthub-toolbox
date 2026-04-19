@@ -1,5 +1,5 @@
 ---
-name: finishing-a-development-branch
+name: rh-sup-finishing-a-development-branch
 description: 在实现已完成、测试全绿，需要决定如何合并、开 PR 或清理分支时使用；通过结构化选项引导收尾。
 ---
 # 收尾开发分支（Finishing a Development Branch）

@@ -1,5 +1,5 @@
 ---
-name: executing-plans
+name: rh-sup-executing-plans
 description: 在已有书面实现计划、且需在单独会话中按检查点执行时使用。
 ---
 # 执行计划（Executing Plans）

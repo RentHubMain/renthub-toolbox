@@ -1,10 +1,10 @@
-﻿---
-name: legal-version-release
-description: "发布法律文档新版本，完成归档、现行升级、配置更新与构建验证。"
-targets: ["*"]
 ---
-
-# legal-version-release
+name: legal-version-release
+description: 在 `renthub-docs/legal/` 协议定稿后发布新版本：归档旧版、升级现行版、更新导航与配置并验证构建。
+targets:
+  - '*'
+---
+# 法律文档版本发布（legal-version-release）
 
 ## 适用场景
 

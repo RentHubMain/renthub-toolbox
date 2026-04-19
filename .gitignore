@@ -3,3 +3,24 @@ renthub-docs/
 renthub-mini-program/
 renthub-official-website/
 .github
+
+# -----------------------------------------------------------------------------
+# AI 工具生成的本地目录与缓存（仍跟踪 .rulesync/ 与 rulesync.jsonc）
+# -----------------------------------------------------------------------------
+.cursor/
+.claude/
+.factory/
+.codex/
+.continue/
+.windsurf/
+.augment/
+.copilot/
+.gemini/
+.aider*
+**/.aider*
+.kilocode/
+.opencode/
+.openclaw/
+.kiro/
+.slate/
+.trae/

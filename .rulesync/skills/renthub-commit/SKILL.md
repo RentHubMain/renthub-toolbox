@@ -1,10 +1,10 @@
-﻿---
-name: renthub-commit
-description: "按 RentHub Conventional Commits 规范生成并执行高质量提交。"
-targets: ["*"]
 ---
-
-# renthub-commit
+name: renthub-commit
+description: 按 RentHub Conventional Commits 规范起草中文提交说明，并在用户确认后执行 commit。
+targets:
+  - '*'
+---
+# 提交规范（renthub-commit）
 
 ## 适用场景
 

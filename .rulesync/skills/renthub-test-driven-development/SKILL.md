@@ -1,9 +1,9 @@
 ---
 name: test-driven-development
-description: "在编写实现代码之前，实现任何功能或修复任何缺陷时使用。"
-targets: ["*"]
+description: 在编写生产代码之前默认启用：新功能、缺陷、重构与行为变更均应先红后绿再重构。
+targets:
+  - '*'
 ---
-
 # 测试驱动开发（TDD）
 
 ## 概述

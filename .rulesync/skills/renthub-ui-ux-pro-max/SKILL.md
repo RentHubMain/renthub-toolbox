@@ -1,10 +1,10 @@
-﻿---
-name: ui-ux-pro-max
-description: "基于内置数据集快速生成可落地的 UI/UX 设计系统与实现建议。"
-targets: ["*"]
 ---
-
-# ui-ux-pro-max
+name: ui-ux-pro-max
+description: 基于内置数据集检索，快速产出可落地的 UI/UX 设计系统与实现要点（Web/移动端均可）。
+targets:
+  - '*'
+---
+# UI/UX 专业增强（ui-ux-pro-max）
 
 ## 适用场景
 
@@ -22,25 +22,25 @@ targets: ["*"]
 1. 先生成设计系统（必选）
 
 ```bash
-python3 skills/ui-ux-pro-max/scripts/search.py "<product> <industry> <keywords>" --design-system -p "<Project Name>"
+python3 .cursor/skills/renthub-ui-ux-pro-max/scripts/search.py "<product> <industry> <keywords>" --design-system -p "<Project Name>"
 ```
 
 2. 需要跨会话复用时，持久化
 
 ```bash
-python3 skills/ui-ux-pro-max/scripts/search.py "<query>" --design-system --persist -p "<Project Name>"
+python3 .cursor/skills/renthub-ui-ux-pro-max/scripts/search.py "<query>" --design-system --persist -p "<Project Name>"
 ```
 
 3. 需要细化时，按域补充检索
 
 ```bash
-python3 skills/ui-ux-pro-max/scripts/search.py "<keyword>" --domain <product|style|typography|color|landing|chart|ux|react|web|prompt>
+python3 .cursor/skills/renthub-ui-ux-pro-max/scripts/search.py "<keyword>" --domain <product|style|typography|color|landing|chart|ux|react|web|prompt>
 ```
 
 4. 输出栈相关实现建议（默认 `html-tailwind`）
 
 ```bash
-python3 skills/ui-ux-pro-max/scripts/search.py "<keyword>" --stack <html-tailwind|react|nextjs|vue|svelte|swiftui|react-native|flutter|shadcn|jetpack-compose>
+python3 .cursor/skills/renthub-ui-ux-pro-max/scripts/search.py "<keyword>" --stack <html-tailwind|react|nextjs|vue|svelte|swiftui|react-native|flutter|shadcn|jetpack-compose>
 ```
 
 ## 输出要求

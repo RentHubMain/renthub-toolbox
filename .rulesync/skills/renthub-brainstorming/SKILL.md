@@ -1,9 +1,9 @@
 ---
 name: brainstorming
-description: "在任何创造性工作之前必须使用——创建功能、构建组件、增加能力或修改行为。在实现之前通过对话澄清用户意图、需求与设计。"
-targets: ["*"]
+description: 在实现前必须通过对话澄清意图与设计的脑暴流程；适用于新功能、组件、能力扩展或行为变更等创造性工作。
+targets:
+  - '*'
 ---
-
 # 将想法脑暴成设计
 
 通过自然的协作式对话，帮助把想法落实为完整的设计与规格。
@@ -11,7 +11,7 @@ targets: ["*"]
 先理解当前项目上下文，然后每次只问一个问题来细化想法。一旦清楚要构建什么，就呈现设计并征得用户同意。
 
 <HARD-GATE>
-在展示设计且用户同意之前，不要调用任何实现类 skill、不要写代码、不要脚手架、不要采取任何实现动作。无论项目看起来多简单，都适用。
+在展示设计且用户同意之前，不要调用任何实现类技能、不要写代码、不要脚手架、不要采取任何实现动作。无论项目看起来多简单，都适用。
 </HARD-GATE>
 
 ## 反模式：「这太简单了，不需要设计」
@@ -30,7 +30,7 @@ targets: ["*"]
 6. **撰写设计文档** — 保存到 `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` 并提交
 7. **规格自检** — 快速检查占位符、矛盾、歧义、范围（见下）
 8. **用户审阅成文规格** — 请用户在继续前阅读规格文件
-9. **转入实现** — 调用 writing-plans skill 生成实现计划
+9. **转入实现** — 调用 writing-plans 技能生成实现计划
 
 ## 流程
 
@@ -46,7 +46,7 @@ digraph brainstorming {
     "撰写设计文档" [shape=box];
     "规格自检\n（当场修正）" [shape=box];
     "用户审阅规格？" [shape=diamond];
-    "调用 writing-plans skill" [shape=doublecircle];
+    "调用 writing-plans\n（编写计划）" [shape=doublecircle];
 
     "摸清项目上下文" -> "接下来有视觉问题？";
     "接下来有视觉问题？" -> "提供可视化伴侣\n（单独消息，无其他内容）" [label="是"];
@@ -60,11 +60,11 @@ digraph brainstorming {
     "撰写设计文档" -> "规格自检\n（当场修正）";
     "规格自检\n（当场修正）" -> "用户审阅规格？";
     "用户审阅规格？" -> "撰写设计文档" [label="要求修改"];
-    "用户审阅规格？" -> "调用 writing-plans skill" [label="通过"];
+    "用户审阅规格？" -> "调用 writing-plans\n（编写计划）" [label="通过"];
 }
 ```
 
-**终止状态是调用 writing-plans。** 不要调用 frontend-design、mcp-builder 或其他实现类 skill。脑暴之后唯一应调用的 skill 是 writing-plans。
+**终止状态为调用 writing-plans（编写计划）。** 不要调用 frontend-design、mcp-builder 或其他实现类技能。脑暴之后唯一应接着调用的技能是 writing-plans。
 
 ## 流程要点
 
@@ -111,7 +111,7 @@ digraph brainstorming {
 
 - 将已确认的设计（规格）写入 `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md`
   - （用户对规格路径的偏好优先于本默认）
-- 若可用，使用 elements-of-style:writing-clearly-and-concisely skill
+- 若可用，使用 elements-of-style:writing-clearly-and-concisely 技能
 - 将设计文档提交到 git
 
 **规格自检：**
@@ -133,8 +133,8 @@ digraph brainstorming {
 
 **实现：**
 
-- 调用 writing-plans skill 生成详细实现计划
-- 不要调用其他 skill。下一步只能是 writing-plans。
+- 调用 writing-plans 技能生成详细实现计划
+- 不要调用其他技能。下一步只能是 writing-plans。
 
 ## 核心原则
 
@@ -161,5 +161,5 @@ digraph brainstorming {
 
 关于 UI 的话题不等于自动是视觉题。「个性在这里指什么？」是概念题——用终端。「哪种向导版式更好？」是视觉题——用浏览器。
 
-若用户同意使用伴侣，继续前请先阅读详细说明：
-`skills/brainstorming/visual-companion.md`
+若用户同意使用伴侣，继续前请先阅读同目录说明：
+`visual-companion.md`

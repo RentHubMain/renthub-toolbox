@@ -109,7 +109,7 @@ Skills 是写给 **AI 代理** 的操作说明：何时启用、按什么步骤�
 | 项目 | 说明 |
 |------|------|
 | **何时用** | 要做 **UI/UX 设计、实现、优化或评审**（Web / 移动端均可）时。 |
-| **怎么用** | 准备 **产品类型、行业/场景、风格关键词、技术栈**；在仓库内用 Python 跑 **`scripts/search.py`**（路径：`.rulesync/skills/renthub-ui-ux-pro-max/scripts/search.py`）生成设计系统、按域/栈检索；输出需覆盖方向、色板字体、结构组件、交互与 a11y、反模式、落地要点等（详见 `SKILL.md`）。 |
+| **怎么用** | 准备 **产品类型、行业/场景、风格关键词、技术栈**；在仓库内用 Python 跑 **`scripts/search.py`**（路径以 **`.cursor/skills/renthub-ui-ux-pro-max/scripts/search.py`** 为准；若你通过 rulesync 生成到别处的副本，以生成后 `SKILL.md` 中的命令为准）生成设计系统、按域/栈检索；输出需覆盖方向、色板字体、结构组件、交互与 a11y、反模式、落地要点等（详见 `SKILL.md`）。 |
 
 ---
 

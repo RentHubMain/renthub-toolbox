@@ -1,160 +1,109 @@
-# RentHub Rulesync Toolbox
+# RentHub Toolbox
 
-> 团队里往往同时用多种 AI 工具（Copilot、Codex CLI、Claude Code、Cursor 等），但各工具的约定文件格式不同，容易重复维护、漂移不一致。  
-> **Rulesync** 把规则、命令、skills 等收敛成**单一源码树**（本仓库中的 `.rulesync/`），再按需生成到各工具的配置目录。
+> RentHub 团队在 Cursor、Claude Code、Codex、Copilot 等 AI 工具上共用一套 **Agent Skills**、规则与命令。本仓库是这些约定的**单一源码**，通过 [skills CLI](https://github.com/vercel-labs/skills) 安装到各工具。
 
-## 1) Rulesync 是什么
+## 快速开始：安装 Skills
 
-Rulesync 是 **AI 约定同步器**：
+在**你的业务项目根目录**（例如 `renthub-admin-panel/`）执行：
 
-- **单一事实来源**：在 `.rulesync/` 里写一次，多工具复用。
-- **多目标导出**：生成到 Cursor / Claude Code / Copilot 等各自识别的路径与格式。
-- **可版本管理**：源码是普通文本，适合 Git 与 Code Review。
-- **模块化**：可按需启用 rules、ignore、mcp、commands、subagents、**skills**、hooks 等。
+```bash
+npx skills add RentHubMain/renthub-toolbox
+```
 
-官方文档：
+CLI 会检测本机已安装的 AI 工具，将 `skills/` 下的技能包安装到对应目录（如 Cursor 的 `.agents/skills/`、Claude Code 的 `.claude/skills/` 等）。交互过程中可选择：
 
-- [Installation](https://rulesync.dyoshikawa.com/getting-started/installation.html)
-- [Quick Start](https://rulesync.dyoshikawa.com/getting-started/quick-start.html)
-- [Why Rulesync](https://rulesync.dyoshikawa.com/guide/why-rulesync.html)
+- **安装范围**：项目内（默认，便于团队共享）或全局（`-g`）
+- **安装方式**：符号链接（推荐，便于 `npx skills update`）或复制（`--copy`）
 
-## 2) 为什么需要 Rulesync
+### 常用命令
 
-在多人、多工具并行时，Rulesync 有助于：
+```bash
+# 列出本仓库提供的技能（不安装）
+npx skills add RentHubMain/renthub-toolbox --list
 
-- 避免同一套规范散落在多个目录、各改各的。
-- 减少「某个工具更新了、另一个没跟上」的漂移。
-- 新人只需理解 **`.rulesync/` 的布局**，而不是每个 IDE 各一套位置。
+# 只安装指定技能
+npx skills add RentHubMain/renthub-toolbox --skill renthub-commit --skill rh-sup-brainstorming
 
-典型工作流：
+# 指定目标工具（例如 Cursor）
+npx skills add RentHubMain/renthub-toolbox -a cursor
 
-- 在 **`.rulesync/`** 维护源文件。
-- 执行 `rulesync generate`，把产物写到各工具约定位置。
+# 非交互安装（CI / 脚本）
+npx skills add RentHubMain/renthub-toolbox -y
 
-## 3) 本仓库的 Rulesync 资产
+# 更新已安装技能
+npx skills update
 
-### 根配置
+# 查看已安装技能
+npx skills list
+```
 
-- **`rulesync.jsonc`**
-  - `targets`: `copilot`, `cursor`, `claudecode`, `codexcli`
-  - `features`: `rules`, `ignore`, `mcp`, `commands`, `subagents`, `skills`, `hooks`
-  - `baseDirs`: `.`
-  - `delete`: `true`（生成时可删除旧目标文件）
-  - `gitignoreTargetsOnly`: `true`
+安装后会在项目根生成 `skills-lock.json`（本地锁文件，已纳入本仓库 `.gitignore`，勿提交）。
 
-### 目录结构（节选）
+更多选项见 [vercel-labs/skills](https://github.com/vercel-labs/skills) 文档。
 
-- **`.rulesync/.aiignore`** — 统一忽略规则源文件  
-- **`.rulesync/rules/`** — 各子项目指南（overview、admin、docs、mini、website 等）  
-- **`.rulesync/mcp.json`** — MCP 服务器配置（可按需填充）  
-- **`.rulesync/commands/`** — 例如 `review-pr.md`  
-- **`.rulesync/subagents/`** — 例如 `planner.md`  
-- **`.rulesync/skills/`** — **Agent Skills（见下一节）**  
-- **`.rulesync/hooks.json`** — Hooks（可按需填充）
+## 本仓库结构
 
-## 4) Agent Skills（`.rulesync/skills/`）
+| 路径 | 说明 |
+|------|------|
+| **`skills/`** | Agent Skills 源码，入口为各子目录下的 `SKILL.md` |
+| **`rules/`** | 各子项目指南（overview、admin、docs、mini、website） |
+| **`commands/`** | 自定义命令（如 `review-pr.md`） |
+| **`subagents/`** | 子代理定义（如 `planner.md`） |
+
+`skills/` 由 `npx skills add` 自动分发；`rules/`、`commands/`、`subagents/` 目前需在对应工具中按需引用或手动配置（各客户端路径不同）。
+
+## Agent Skills（`skills/`）
 
 Skills 是写给 **AI 代理** 的操作说明：何时启用、按什么步骤做、有哪些硬约束。  
-**源码目录**：`.rulesync/skills/<skill 文件夹>/`，入口一般为 **`SKILL.md`**。
+**源码目录**：`skills/<skill 文件夹>/`，入口为 **`SKILL.md`**。
 
 **你怎么用：**
 
-1. **生成到工具**：在项目根执行 `rulesync generate`（或指定 `--targets` / `--features skills`），让 Cursor / Claude 等加载生成后的 skill。  
-2. **在对话里显式引用**：在支持 `@` 引用路径的客户端中，可 **`@.rulesync/skills/.../SKILL.md`**（或生成后的等价路径），让当前会话按该 skill 执行。  
-3. **人工阅读**：直接打开对应 `SKILL.md` 了解流程与命令。
+1. **安装**：`npx skills add RentHubMain/renthub-toolbox`（见上文）。
+2. **在对话里引用**：在支持 `@` 的客户端中，可 `@` 已安装路径下的 `SKILL.md`，让当前会话按该 skill 执行。
+3. **人工阅读**：直接打开本仓库 `skills/.../SKILL.md` 了解流程。
 
-以下为 **RentHub 当前内置的 5 个 skill**（YAML `name` 与技能包目录名一致：`renthub-*` / `rh-sup-*`）。
+以下为 **RentHub 当前内置技能**（YAML `name` 与目录名一致）。
 
----
+### RentHub 业务技能（`renthub-*`）
 
-### `rh-sup-brainstorming`（`name: rh-sup-brainstorming`）
+| 技能 | 何时用 |
+|------|--------|
+| **`renthub-commit`** | 按 Conventional Commits 起草中文提交说明并确认后提交 |
+| **`renthub-legal-version-release`** | `renthub-docs/legal/` 协议发版、归档与导航更新 |
+| **`renthub-ui-ux-pro-max`** | UI/UX 设计系统检索与实现要点（Web/移动端） |
 
-| 项目 | 说明 |
-|------|------|
-| **何时用** | 在写代码/脚手架/改行为之前，做任何**创造性或规格级**工作前：**新功能、新组件、改交互、改架构**等。 |
-| **怎么用** | 按 **`.cursor/skills/rh-sup-brainstorming/SKILL.md`** 流程：摸清上下文 → 必要时提供「可视化伴侣」→ 逐条澄清 → 给出 2–3 方案 → 分节设计并获批准 → 写设计文档到 `docs/superpowers/specs/` → 规格自检与用户审阅 → 再进入实现（文档中约定下一步为 **`rh-sup-writing-plans`**，**禁止**在设计批准前写实现代码）。 |
-| **配套文件** | `visual-companion.md`（浏览器可视化脑暴）、`spec-document-reviewer-prompt.md`（子代理审规格模板）、`scripts/`（本地预览服务器等）。 |
+### Superpowers 流程技能（`rh-sup-*`）
 
----
+| 技能 | 何时用 |
+|------|--------|
+| **`rh-sup-using-superpowers`** | 每次对话开始时：发现与加载相关技能 |
+| **`rh-sup-brainstorming`** | 新功能/改行为前的创意与规格澄清 |
+| **`rh-sup-writing-plans`** | 有多步需求、尚未写代码时撰写实现计划 |
+| **`rh-sup-executing-plans`** | 在单独会话中按检查点执行书面计划 |
+| **`rh-sup-subagent-driven-development`** | 本会话中执行彼此独立的实现任务 |
+| **`rh-sup-dispatching-parallel-agents`** | 2 个以上可并行、无共享状态的任务 |
+| **`rh-sup-test-driven-development`** | 实现功能或修 bug 前：红→绿→重构 |
+| **`rh-sup-systematic-debugging`** | 缺陷/测试失败：先根因再修复 |
+| **`rh-sup-verification-before-completion`** | 声称完成前必须跑验证命令 |
+| **`rh-sup-requesting-code-review`** | 完成功能或合并前请求评审 |
+| **`rh-sup-receiving-code-review`** | 收到评审意见后落实建议 |
+| **`rh-sup-finishing-a-development-branch`** | 实现完成、测试通过后决定合并/PR |
+| **`rh-sup-using-git-worktrees`** | 需要与工作区隔离的功能开发 |
+| **`rh-sup-writing-skills`** | 新建或编辑 Agent Skill |
 
-### `renthub-commit`（`name: renthub-commit`）
+各技能细节见对应 `skills/<name>/SKILL.md`。
 
-| 项目 | 说明 |
-|------|------|
-| **何时用** | 用户说「帮我 commit / 写 commit message / 提交」或需要按 **Conventional Commits** 规范提交时。 |
-| **怎么用** | `git status` / `git diff` 判断粒度 → 按 `type(scope): subject` 起草中文 subject（与可选 body）→ **经用户确认后再** `git commit`；禁止未确认自动提交；禁止 AI 署名式废话。 |
+## 维护本仓库
 
----
-
-### `renthub-legal-version-release`（`name: renthub-legal-version-release`）
-
-| 项目 | 说明 |
-|------|------|
-| **何时用** | **`renthub-docs/legal/`** 协议修订完成，需要**发新版本**并**保留历史版本**（归档 + 现行版升级 + 导航）。 |
-| **怎么用** | 先拿到 **旧版号、新版号、生效日期** 三项输入；再按 `SKILL.md` 执行 Docusaurus 版本化、归档文档与 `index` 链接修正、现行版 front matter、navbar / `docusaurus.config.ts`、`npm run build` 等；**不改正文语义**，只做版本与导航一致性。 |
-
----
-
-### `rh-sup-test-driven-development`（`name: rh-sup-test-driven-development`）
-
-| 项目 | 说明 |
-|------|------|
-| **何时用** | **实现任何功能或修 bug 之前**；新功能、缺陷、重构、行为变更都应默认遵循（文档列出的少数例外需与协作方确认）。 |
-| **怎么用** | 严格 **红 → 绿 → 重构**：先写**失败测试**并看到失败 → 最少实现通过 → 再整理；禁止先写生产代码再补测试。Mock / 测试坏味道见 **`.cursor/skills/rh-sup-test-driven-development/testing-anti-patterns.md`**。 |
-
----
-
-### `renthub-ui-ux-pro-max`（`name: renthub-ui-ux-pro-max`）
-
-| 项目 | 说明 |
-|------|------|
-| **何时用** | 要做 **UI/UX 设计、实现、优化或评审**（Web / 移动端均可）时。 |
-| **怎么用** | 准备 **产品类型、行业/场景、风格关键词、技术栈**；在仓库内用 Python 跑 **`scripts/search.py`**（路径以 **`.cursor/skills/renthub-ui-ux-pro-max/scripts/search.py`** 为准；若你通过 rulesync 生成到别处的副本，以生成后 `SKILL.md` 中的命令为准）生成设计系统、按域/栈检索；输出需覆盖方向、色板字体、结构组件、交互与 a11y、反模式、落地要点等（详见 `SKILL.md`）。 |
-
----
-
-## 5) RentHub Toolbox 用法（Rulesync）
-
-### 安装
+在 **RentHub Toolbox 仓库根目录** 修改 `skills/` 后，推送到 `RentHubMain/renthub-toolbox`；业务项目内执行 `npx skills update` 即可拉取更新。
 
 ```bash
-npm install -g rulesync
-# 或
-brew install rulesync
-
-rulesync --version
-rulesync --help
+# 在业务项目中更新来自本仓库的技能
+npx skills update
 ```
 
-### 日常同步
-
-```bash
-# 1) 编辑 .rulesync/ 下源文件（rules、skills、commands 等）
-
-# 2) 仅同步 skills 到某目标（示例：Copilot）
-rulesync generate --targets copilot --features skills
-
-# 3) 全量生成（按 rulesync.jsonc 配置）
-rulesync generate --targets "*" --features "*"
-```
-
-### 从已有工具配置反向导入（可选）
-
-```bash
-rulesync import --targets claudecode
-rulesync import --targets cursor
-rulesync import --targets copilot
-rulesync import --targets claudecode --features rules,mcp,commands,subagents
-```
-
-### 新项目初始化（可选）
-
-```bash
-rulesync init
-rulesync fetch dyoshikawa/rulesync --features skills
-```
-
-### 文本编码与乱码排查
+## 文本编码与乱码排查
 
 仓库中文文档应为 **UTF-8**。若在编辑器里看到 **U+FFFD 替换符**、问号方块或「汉字变西欧符号」，常见原因是文件曾被存成 **GBK** 或 UTF-8 被破坏。
 
@@ -169,6 +118,6 @@ rulesync fetch dyoshikawa/rulesync --features skills
   `python scripts/check_text_encoding.py --repair-readme`  
   将其规范为 UTF-8（LF）；等价于用编辑器「另存为 UTF-8」。
 
-## 6) 一句话总结
+## 一句话总结
 
-**Rulesync 在 RentHub 里的角色**：把多工具、多格式的 AI 约定收成 **一份可维护的 `.rulesync/` 源码**，需要时再生成到各工具，**Skills 集中在 `.rulesync/skills/`，由 `SKILL.md` 定义何时用、怎么用。**
+**RentHub Toolbox**：在 GitHub 上维护统一的 Agent Skills 与配套约定；业务项目用 **`npx skills add RentHubMain/renthub-toolbox`** 安装，用 **`npx skills update`** 保持同步。

@@ -23,3 +23,6 @@ renthub-official-website/
 .kiro/
 .slate/
 .trae/
+.cursor/
+.agents/
+docs/

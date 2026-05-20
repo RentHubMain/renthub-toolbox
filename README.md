@@ -17,23 +17,33 @@ CLI 会检测本机已安装的 AI 工具，将 `skills/` 下的技能包安装�
 
 ### 常用命令
 
+**列出本仓库提供的技能（不安装）：**
 ```bash
-# 列出本仓库提供的技能（不安装）
 npx skills add RentHubMain/renthub-toolbox --list
+```
 
-# 只安装指定技能
+**只安装指定技能：**
+```bash
 npx skills add RentHubMain/renthub-toolbox --skill renthub-commit --skill rh-sup-brainstorming
+```
 
-# 指定目标工具（例如 Cursor）
+**指定目标工具（例如 Cursor）：**
+```bash
 npx skills add RentHubMain/renthub-toolbox -a cursor
+```
 
-# 非交互安装（CI / 脚本）
+**非交互安装（CI / 脚本）：**
+```bash
 npx skills add RentHubMain/renthub-toolbox -y
+```
 
-# 更新已安装技能
+**更新已安装技能：**
+```bash
 npx skills update
+```
 
-# 查看已安装技能
+**查看已安装技能：**
+```bash
 npx skills list
 ```
 
